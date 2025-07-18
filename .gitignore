@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Virtual environments
+env/
+venv/
+*.env
+
+# Csv files
+data/
+*.csv
+
+# Logs
+*.log
+
+# Model artifacts
+*.pkl
+*.joblib
