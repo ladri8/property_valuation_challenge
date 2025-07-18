@@ -1,0 +1,25 @@
+# Core ML stack
+pandas
+numpy
+scikit-learn
+statsmodels
+category_encoders
+
+# Pipeline & validation
+prefect
+pandera
+
+# API
+fastapi
+uvicorn
+python-multipart
+pydantic
+
+# Config & utils
+python-dotenv
+PyYAML
+
+# Dev/test tools
+pytest
+flake8
+ruff

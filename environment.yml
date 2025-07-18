@@ -1,0 +1,19 @@
+name: property-val-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pandas
+  - numpy
+  - scikit-learn
+  - fastapi
+  - uvicorn
+  - pydantic
+  - pandera
+  - prefect
+  - python-dotenv
+  - pip:
+      - pytest
+      - flake8
