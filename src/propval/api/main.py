@@ -29,10 +29,10 @@ app = FastAPI(
 
 # Pydantic models for request/response validation
 class PredictRequest(BaseModel):
-    data: list[dict]  # list of feature dictionaries
+    data: list[dict]  # list of feature dictionaries, make sure to constrain to model features
 
 class PredictResponse(BaseModel):
-    predictions: list[float]
+    predictions: list[float] # could make this result prettier 
 
 @app.post("/predict", response_model=PredictResponse)
 def predict(req: PredictRequest):
@@ -52,7 +52,7 @@ def predict(req: PredictRequest):
 
     return PredictResponse(predictions=preds.tolist())
 
+#Health Check
 @app.get("/health")
 def health():
-    """Health check endpoint."""
     return {"status": "ok"}

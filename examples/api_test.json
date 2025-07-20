@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "type": "casa",
+      "sector": "las condes",
+      "net_usable_area": 140.0,
+      "net_area": 176.0,
+      "n_rooms": 4,
+      "n_bathroom": 3,
+      "latitude": -33.42117,
+      "longitude": -70.50105
+    }
+  ]
+}
