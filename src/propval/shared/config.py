@@ -28,5 +28,7 @@ class Settings(BaseSettings):
         "loss": "absolute_error",
     }
 
-    #add model paths here later 
+    # new fields for model persistence
+    model_dir: Path = Path("models")   # relative to BASE_DIR
+    model_filename: str  = "pipeline.joblib"  
     
