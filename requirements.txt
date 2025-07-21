@@ -1,25 +1,4 @@
-# Core ML stack
-pandas
-numpy
-scikit-learn
-statsmodels
-category_encoders
+category_encoders==2.8.1
+joblib==1.5.1
+pydantic_settings==2.10.1
 
-# Pipeline & validation
-prefect
-pandera
-
-# API
-fastapi
-uvicorn
-python-multipart
-pydantic
-
-# Config & utils
-python-dotenv
-PyYAML
-
-# Dev/test tools
-pytest
-flake8
-ruff

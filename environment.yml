@@ -1,25 +1,18 @@
-# This file defines the Conda environment for the propval pipeline:
-#
-# To create/update:
-#   conda env create -f environment.yml
-#   conda env update -f environment.yml
-
 name: property-val-env
 channels:
-  - conda-forge
   - defaults
+  - conda-forge
 dependencies:
-  - python=3.10
-  - pip
-  - pandas
-  - numpy
-  - scikit-learn
   - fastapi
-  - uvicorn
-  - pydantic
+  - numpy
+  - pandas
   - pandera
+  - pip
   - prefect
+  - pydantic
   - python-dotenv
-  - pip:
-      - pytest
-      - flake8
+  - python=3.10
+  - scikit-learn
+  - uvicorn
+  - ipykernel
+prefix: /home/ladri8/miniconda3/envs/property-val-env
