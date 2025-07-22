@@ -1,0 +1,25 @@
+# Dockerfile for the prefect pipeline using micromamba 
+
+FROM mambaorg/micromamba:1.4.3
+
+WORKDIR /app
+
+# Copy & build the conda env
+
+COPY environment.yml /app/
+RUN micromamba env create \
+      --file environment.yml \
+      --name property-val-env \
+    && micromamba clean --all --yes
+
+# Use env for all RUN/CMD
+
+SHELL ["micromamba", "run", "-n", "property-val-env", "/bin/bash", "-lc"]
+
+# Copy source code
+
+COPY src /app/src
+ENV PYTHONPATH=/app/src
+
+# Run the Prefect flow (with training and evaluation) on container start
+ENTRYPOINT ["micromamba", "run", "-n", "property-val-env", "python", "-m", "propval.main_flow"]
