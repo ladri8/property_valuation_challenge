@@ -1,8 +1,14 @@
+"""
+# build_pipeline.py
+# This module constructs a machine learning pipeline using sklearn.
+# It includes preprocessing steps and a model, ready for training and prediction.   
+"""
+
 from category_encoders import TargetEncoder
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.model_selection import GridSearchCV
+
 
 from propval.shared.config import Settings
 

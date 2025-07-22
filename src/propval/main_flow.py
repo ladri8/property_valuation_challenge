@@ -26,12 +26,11 @@ from sklearn.metrics import (
     mean_absolute_percentage_error,
     mean_absolute_error)
 
-from propval.constants import BASE_DIR
-from propval.shared.config import Settings
-from propval.data.data_loader import load_data_csv
-from propval.shared.config import Settings
-from propval.data.schema_validation import schema, validate_and_log
-from propval.pipelines.build_pipeline import build_pipeline
+from .constants import BASE_DIR
+from .shared.config import Settings
+from .data.data_loader import load_data_csv
+from .data.schema_validation import schema, validate_and_log
+from .pipelines.build_pipeline import build_pipeline
 
 from typing import Union, Dict
 
@@ -78,6 +77,8 @@ def save_model(pipeline, model_dir: Path, model_filename: str) -> Path:
     #logger.info(f"Model saved to {path}")
     return path
 
+# Main Prefect flow for the entire model pipeline
+# Orchestrates the tasks defined above in a logical sequence
 
 @flow(name="property-valuation-train-test-flow")
 def main_flow():

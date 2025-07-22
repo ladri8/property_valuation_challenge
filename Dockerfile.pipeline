@@ -1,4 +1,5 @@
-# Dockerfile for the prefect pipeline using micromamba 
+# Dockerfile for the prefect pipeline using micromamba as environment manager
+# Reduces image size and speeds up builds as opposed to using conda
 
 FROM mambaorg/micromamba:1.4.3
 

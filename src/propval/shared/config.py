@@ -1,3 +1,8 @@
+"""
+Configuration settings
+The Settings class used throughout the project, includes data paths,
+feature configurations, model parameters, and more.
+"""
 from pydantic_settings import BaseSettings
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -14,8 +19,6 @@ class Settings(BaseSettings):
     # id or id_col (since id is a python keyword is not present in the data provided)
     # this can be made extensible in case other data versins have it
     id_col: Optional[str] = None
-
-
     categorical_cols: List[str] = ["type", "sector"]
     target: str = "price"
 
@@ -29,6 +32,6 @@ class Settings(BaseSettings):
     }
 
     # new fields for model persistence
-    model_dir: Path = Path("models")   # relative to BASE_DIR
+    model_dir: Path = Path("models")  
     model_filename: str  = "pipeline.joblib"  
     
