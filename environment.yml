@@ -1,18 +1,28 @@
 name: property-val-env
 channels:
-  - defaults
   - conda-forge
 dependencies:
-  - fastapi
-  - numpy
-  - pandas
-  - pandera
-  - pip
-  - prefect
-  - pydantic
-  - python-dotenv
+  # core Python version
   - python=3.10
-  - scikit-learn
+
+  # Conda-managed packages (pin to match your requirements.txt)
+  - fastapi=0.116.1
+  - numpy=1.25
+  - pandas=2.3.1
+  - pandera=0.25.0
+  - pydantic=2.11.7
+  - python-dotenv
+  - scikit-learn=1.7.1
   - uvicorn
   - ipykernel
-prefix: /home/ladri8/miniconda3/envs/property-val-env
+  - pip
+
+  # pip-only packages
+
+  - pip:
+    - prefect==3.4.9
+    - category_encoders==2.8.1
+    - joblib==1.5.1
+    - pydantic-settings==2.10.1
+
+
