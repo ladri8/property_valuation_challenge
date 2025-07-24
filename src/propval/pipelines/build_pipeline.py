@@ -20,7 +20,7 @@ def build_pipeline(settings: Settings) -> Pipeline:
     - "model":       a GradientBoostingRegressor(**settings.model_params)
 
     Parameters
-    ----------
+
     settings : Settings
         Pydantic Settings object carrying `categorical_cols` and `model_params`.
 

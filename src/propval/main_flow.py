@@ -6,9 +6,10 @@ This python module is the main prefect flow with tasks for:
 3.model training
 4.model evaluation
 
-The main pipeline can be run from command line with:
+The main pipeline can be run from project root with:
 
-python -m main_flow
+PYTHONPATH=src python src/propval/main_flow.py
+
 
 """
 
@@ -26,11 +27,11 @@ from sklearn.metrics import (
     mean_absolute_percentage_error,
     mean_absolute_error)
 
-from .constants import BASE_DIR
-from .shared.config import Settings
-from .data.data_loader import load_data_csv
-from .data.schema_validation import schema, validate_and_log
-from .pipelines.build_pipeline import build_pipeline
+from propval.constants import BASE_DIR
+from propval.shared.config import Settings
+from propval.data.data_loader import load_data_csv, load_data_auto
+from propval.data.schema_validation import schema, validate_and_log
+from propval.pipelines.build_pipeline import build_pipeline
 
 from typing import Union, Dict
 
@@ -40,7 +41,7 @@ NumericArray = Union[np.ndarray, "pd.Series"]
 
 @task
 def load_data(file_path: Path) -> pd.DataFrame:
-    return load_data_csv(file_path)
+    return load_data_auto(file_path, source="csv")
 
 @task
 def validate_data(df: pd.DataFrame) -> pd.DataFrame:
@@ -151,4 +152,5 @@ def main_flow():
     logger.info(f"Model persisted at {saved_model_path}")
 
 if __name__ == "__main__":
-    main_flow()
+    # Disable ephemeral server explicitly via config
+    main_flow(return_state=False)

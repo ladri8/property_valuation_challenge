@@ -33,5 +33,10 @@ class Settings(BaseSettings):
 
     # new fields for model persistence
     model_dir: Path = Path("models")  
-    model_filename: str  = "pipeline.joblib"  
+    model_filename: str  = "pipeline.joblib"
+
+    # API key for authentication
+    api_key: str 
     
+    class Config:
+        env_file = ".env"
