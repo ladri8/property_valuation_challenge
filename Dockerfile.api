@@ -1,11 +1,10 @@
-# Dockerfile for the prefect pipeline using micromamba as environment manager
+# Dockerfile for the api using micromamba as environement manager 
 # Reduces image size and speeds up builds as opposed to using conda
 
+# Base micromamba
 FROM mambaorg/micromamba:1.4.3
 
 WORKDIR /app
-
-# Copy & build the conda env
 
 COPY environment.yml /app/
 RUN micromamba env create \
@@ -13,16 +12,16 @@ RUN micromamba env create \
       --name property-val-env \
     && micromamba clean --all --yes
 
-# Use env for all RUN/CMD
-
+# Activate environment 
 SHELL ["micromamba", "run", "-n", "property-val-env", "/bin/bash", "-lc"]
 
 # Copy source code
-
-COPY src /app/src
+COPY src/ /app/src/
 ENV PYTHONPATH=/app/src
-ENV API_KEY=changethis
+#ENV API_KEY=${API_KEY}
 
+# Expose port 8000
+EXPOSE 8000
 
-# Run the Prefect flow (with training and evaluation) on container start
-ENTRYPOINT ["micromamba", "run", "-n", "property-val-env", "python", "-m", "propval.main_flow"]
+# Run on container start
+ENTRYPOINT ["micromamba", "run", "-n", "property-val-env", "/bin/bash", "-c", "uvicorn propval.api.main:app --host 0.0.0.0 --port 8000"]
