@@ -1,4 +1,4 @@
-# Property Valuation ML Pipeline
+# Property Valuation ML Pipeline Challenge: MVP in < 1 week
 
 
 ## Executive Summary
@@ -75,10 +75,23 @@ docker compose up
 API: Here's an example on how to test the API once running. I also provided a full json example in the examples directory. 
 
 ```bash
-curl -X POST "http://localhost:8000/predict" \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer <your_api_key>" \
-    -d '{"feature_1": value1, "feature_2": value2, ...}'
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: bain-real-key-123" \
+  -d '{
+    "data": [
+      {
+        "type": "casa",
+        "sector": "las condes",
+        "net_usable_area": 140.0,
+        "net_area": 176.0,
+        "n_rooms": 4,
+        "n_bathroom": 3,
+        "latitude": -33.42117,
+        "longitude": -70.50105
+      }
+    ]
+  }'
 ```
 
 Security Note:
@@ -98,7 +111,7 @@ I placed an example .env file here in the repo where the correct api key needs t
 The current model assumes minimal preprocessing. However, real-world pipelines benefit from rigorous data cleaning, handling of missing values and outliers, and standardization of numeric features. Additionally, using a separate validation dataset (in addition to train/test splits) would enable better hyperparameter tuning and help detect overfitting early in the pipeline.
 
 2. Schema Enforcement and Stability:
-I added a Pandera-based validation step to ensure basic schema consistency. While it's not fully enforced to preserve the original notebook structure, this step helps detect shifts in feature distributions over time. More robust schema enforcement — potentially using tools like Weights & Biases — would improve model stability as data evolves.
+I added a Pandera-based validation step to ensure basic schema consistency. While it's not fully enforced to preserve the original notebook structure, this step helps detect shifts in feature distributions over time. More robust schema enforcement, potentially using tools like Weights & Biases would improve model stability as data evolves.
 
 3.  Data Versioning:
 A step of data versioning with tools like DVC, will also benefit the pipeline as things scale. So the datasets and the changes are kept 
@@ -113,13 +126,13 @@ The client can benefit from a SHAP explainer graph (i.e. swarm plot) to understa
 The API , as is, doesn't currently enforce input formats. With a few Pydantic classes this can be accomplished so it has a more robust handling of the incoming request data. 
 
 7. Monitoring for Data Drift:
-After deployment, it's critical to monitor data drift — changes in input distributions that can silently degrade model performance. Detecting drift enables automated retraining or rollback to previous model versions. This monitoring could be enhanced using tools like Prometheus and Grafana for observability.
+After deployment, it's critical to monitor data drift, which is changes in input distributions that can silently degrade model performance. Detecting drift enables automated retraining or rollback to previous model versions. This monitoring could be enhanced using tools like Prometheus and Grafana for observability.
 
 8.	Database Abstraction and Extensibility:
 Since the prompt mentions possible databases, the database abtraction is general, but could be implemented using oop, which could make this more extensible or clear. 
 
 9.	Retraining Strategy:
-The pipeline currently retrains the model each time the container starts, which may be inefficient in production. A better approach would involve a scheduled retraining cadence (e.g., nightly or weekly), or triggering retraining in response to detected data drift — especially useful in fast-changing markets like real estate.
+The pipeline currently retrains the model each time the container starts, which may be inefficient in production. A better approach would involve a scheduled retraining cadence (e.g., nightly or weekly), or triggering retraining in response to detected data drift, especially useful in fast-changing markets like real estate.
 
 10.	CI/CD and Testing Coverage
 With more time, a more robust CI/CD pipeline with more tests, especially for the most input dependent portions and also to validate data types and input and output formats. There is error handling in some places but this can be made more robust in a future iteration. 
